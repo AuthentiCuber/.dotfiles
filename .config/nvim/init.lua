@@ -1,6 +1,3 @@
-require("option")
-require("lsp")
-
 vim.pack.add({
     { src = "https://github.com/neovim/nvim-lspconfig" },
     { src = "https://github.com/nvim-mini/mini.nvim" },
@@ -14,3 +11,6 @@ require("onedark").setup({
 require("onedark").load()
 
 require("mini.statusline").setup()
+
+require("option")
+require("lsp")

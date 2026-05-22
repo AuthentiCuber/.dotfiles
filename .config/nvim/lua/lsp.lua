@@ -14,12 +14,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
         if client:supports_method("textDocument/completion") then
             vim.lsp.completion.enable(true, client.id, ev.buf, {autotrigger = true})
         end
-        vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = ev.buf,
-            callback = function()
-                vim.lsp.buf.format { async = false, id = ev.data.client_id }
-            end
-        })
+        if client:supports_method("textDocument/formatting")
+            and not client:supports_method("textDocument/willSaveWaitUntil") then
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                buffer = ev.buf,
+                callback = function()
+                    vim.lsp.buf.format({ bufnr = ev.buf, id = client.client_id, timeout = 1000 })
+                end
+            })
+        end
     end,
 })
 
