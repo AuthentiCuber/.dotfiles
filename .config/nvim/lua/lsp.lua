@@ -1,7 +1,27 @@
-vim.lsp.config("clangd", {
-    cmd = { "clangd" },
-    filetypes = { "c" }
+vim.lsp.config("pylsp", {
+    settings = {
+        pylsp = {
+            plugins = {
+                pyflakes = { enabled = false },
+                pycodestyle = { enabled = false },
+                autopep8 = { enabled = false },
+                yapf = { enabled = false },
+            }
+        }
+    }
 })
+
+vim.lsp.config("hls", {
+    settings = {
+        haskell = {
+            plugins = {
+                semantictokens = { globalOn = true },
+            }
+        }
+    }
+})
+
+
 
 vim.lsp.enable("pylsp")
 vim.lsp.enable("ruff")
